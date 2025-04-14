@@ -1,4 +1,6 @@
 import logging
+import sys
+from pathlib import Path
 from typing import Any
 
 from emoji import emojize
@@ -12,6 +14,30 @@ from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fi
 
 env = Env()
 env.read_env()
+
+logs_dir = Path("logs")
+logs_dir.mkdir(exist_ok=True)
+log_format = (
+    "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+    "<level>{level: <8}</level> | "
+    "<cyan>{file}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> | "
+    "<level>{message}</level>"
+)
+logger.remove()
+logger.add(
+    sys.stderr,
+    format=log_format,
+    # level="INFO",
+    colorize=True
+)
+logger.add(
+    "logs/errors.log",
+    rotation="10 MB",
+    retention="30 days",
+    level="ERROR",
+    format=log_format,
+    encoding="utf-8",
+)
 
 info_logger = logger.info
 error_logger = logger.error

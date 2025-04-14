@@ -1,0 +1,10 @@
+aiogram
+aiosqlite
+APScheduler
+emoji
+environs
+loguru
+pydantic
+redis
+SQLAlchemy
+tenacity
