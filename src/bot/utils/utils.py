@@ -16,15 +16,15 @@ async def get_file_data_for_answer(file_path: str) -> str:
     """
     try:
         df = pd.read_excel(file_path)
-        info_logger(f'{len(df)=}')
-
+        len_df = len(df)
+        info_logger(f'{len_df=}')
         # Ограничим количество строк для вывода (например, первые 20)
         max_rows_to_show = 20
-        if len(df) > max_rows_to_show:
+        if len_df > max_rows_to_show:
             df = df.head(max_rows_to_show)
-            row_count_info = f"\n\nПоказано первые {max_rows_to_show} строк из {len(df)}"
+            row_count_info = f"\n\nПоказано первые {max_rows_to_show} строк из {len_df}"
         else:
-            row_count_info = f"\n\nВсего строк: {len(df)}"
+            row_count_info = f"\n\nВсего строк: {len_df}"
 
         # Форматируем DataFrame в строку
         result = []
