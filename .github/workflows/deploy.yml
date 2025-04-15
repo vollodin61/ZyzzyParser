@@ -1,25 +1,25 @@
-#name: CI/CD ZyzzyParser dev
-#
-#on:
-#  push:
-#    branches: [ dev ]
-#
-#jobs:
-#  build-and-deploy:
-#    runs-on: ubuntu-22.04
-#    steps:
-#      - name: Deploy to Server
-#        uses: appleboy/ssh-action@v1.2.0
-#        with:
-#          host: ${{ secrets.IP_SERVER_F_TWEB }}
-#          username: ${{ secrets.SERVER_USER_F_TWEB }}
-#          key: ${{ secrets.SSH_KEY_GITHUB_F_TWEB }}
-#          script: |
-#            eval "$(ssh-agent -s)"
-#            ssh-add ~/.ssh/tweb_git
-#            ssh -T git@github.com
-#            cd /home/F/ZyzzyParser
-#            git pull origin dev
-##            docker compose restart zyzzyparser
-##            docker compose down
-##            docker compose up --build -d
+name: CI/CD ZyzzyParser dev
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.IP_SERVER_F_TWEB }}
+          username: ${{ secrets.SERVER_USER_F_TWEB }}
+          key: ${{ secrets.SSH_KEY_GITHUB_F_TWEB }}
+          script: |
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/tweb_git
+            ssh -T git@github.com
+            cd /home/test/ZyzzyParser
+            git pull origin dev
+#            docker compose restart zyzzybot
+#            docker compose down
+#            docker compose up --build -d
