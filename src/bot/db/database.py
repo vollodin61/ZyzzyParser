@@ -98,5 +98,3 @@ async def save_data_from_tables_to_db(file_path, chunk_size: int = 100):
                 continue
     info_logger(f'\nУспешно добавлено: {success}\n'
                 f'Ошибок при добавлении: {errors}')
-
-# asyncio.run(create_tables())
