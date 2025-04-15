@@ -13,42 +13,10 @@ services:
       - .:/zyzzybot
       - ./src/bot/logs:/src/bot/logs
     depends_on:
-      - zyzzy_redis
+      - redis_
 
-  zyzzy_redis:
-    image: redis:7.2.5-alpine3.20
-    container_name: zyzzy_redis
-    ports:
-      - "127.0.0.1:6379:6379"
-    networks:
-      zyzzy_net:
-    volumes:
-      - ./redis_config/redis.conf:/usr/local/etc/redis/redis.conf:ro
-      - zyzzy_redis_data:/data
-    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
-
-
-  zyzzy_nginx:
-    image: nginx:stable-alpine
-    container_name: nginx
-    volumes:
-      - './nginx.conf:/etc/nginx/nginx.conf'
-      - '/etc/letsencrypt:/etc/letsencrypt'
-      - '/var/docker/nginx/logs:/var/log/nginx'
-    ports:
-      - 443:443
-      - 80:80
-    networks:
-      zyzzy_net:
-    depends_on:
-      - zyzzy_redis
-      - zyzzybot
-
-volumes:
-  zyzzy_redis_data:
 
 networks:
-  zyzzy_net:
-    name: zyzzy_net
-    driver:
-      bridge
+  nginx_net:
+    driver: bridge
+    external: true
