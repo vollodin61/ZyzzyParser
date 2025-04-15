@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 import pandas as pd
-from aiogram import Router, Bot
+from aiogram import Router, Bot, F
 from aiogram.filters import CommandStart, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
@@ -20,12 +20,21 @@ def_router = Router()
 async def cmd_start_handler(msg: Message, state: FSMContext):
     await msg.answer("Hello, my friend! 🤗\n\nНажми на кнопку, получишь результат! 😉",
                      reply_markup=await add_file_keyboard_button())
+
+
+@def_router.message(F.text == 'Загрузить файл')
+async def button_handler(msg: Message, state: FSMContext):
     await state.set_state(MyStates.wait_file_for_parse)
+    await msg.answer('Я готов принять файл в формате .xls или .xlsx')
 
 
 @def_router.message(StateFilter(MyStates.wait_file_for_parse))
 async def wait_file_for_parse_handler(msg: Message, state: FSMContext, bot: Bot):
-    if not msg.document.file_name.endswith(('.xlsx', '.xls')) or not msg.document:
+    if not msg.document:
+        await msg.answer("Это не то, что я ожидаю)) Пришли файл Excel-формата")
+        return
+
+    if not msg.document.file_name.endswith(('.xlsx', '.xls')):
         await msg.answer("Это не то, что я ожидаю)) Пришли файл Excel-формата")
         return
 
