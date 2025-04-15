@@ -49,5 +49,6 @@ volumes:
 
 networks:
   zyzzy_net:
+    name: zyzzy_net
     driver:
       bridge
