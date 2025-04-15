@@ -17,7 +17,7 @@ async def get_file_data_for_answer(file_path: str) -> str:
     try:
         df = pd.read_excel(file_path)
         len_df = len(df)
-        info_logger(f'{len_df=}')
+        info_logger(f'Строк в файле: {len_df}')
         # Ограничим количество строк для вывода (например, первые 20)
         max_rows_to_show = 20
         if len_df > max_rows_to_show:
