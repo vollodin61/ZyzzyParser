@@ -4,7 +4,7 @@ import pandas as pd
 from typing import Tuple, Optional
 
 from src.bot.utils.exceptions import MissingColumnsError, FileValidationError
-from src.config import error_logger
+from src.config import error_logger, info_logger
 
 
 async def get_file_data_for_answer(file_path: str) -> str:
@@ -22,6 +22,7 @@ async def get_file_data_for_answer(file_path: str) -> str:
         if len(df) > max_rows_to_show:
             df = df.head(max_rows_to_show)
             row_count_info = f"\n\nПоказано первые {max_rows_to_show} строк из {len(df)}"
+            info_logger(f'{len(df)=}')
         else:
             row_count_info = f"\n\nВсего строк: {len(df)}"
 
