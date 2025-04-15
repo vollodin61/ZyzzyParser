@@ -9,6 +9,7 @@ from aiohttp import web
 
 from src.bot.commands.bot_commands import set_commands
 from src.bot.config.bot_config import BotConfig
+from src.bot.db.database import create_tables
 from src.bot.handlers.setter_handlers import set_routers
 from src.bot.middlewares.set_middlewares import set_middleware
 from src.config import error_logger, info_logger
@@ -55,6 +56,7 @@ def main():
         host=BotConfig.web_server_host,
         port=BotConfig.web_server_port
     )
+    asyncio.run(create_tables())
 
 
 if __name__ == "__main__":
@@ -72,7 +74,7 @@ if __name__ == "__main__":
 #     set_routers(dp=BotConfig.dp)
 #     await BotConfig.bot.delete_webhook(drop_pending_updates=True)
 #     await BotConfig.dp.start_polling(BotConfig.bot)
-#
+#     asyncio.run(create_tables())
 #
 # if __name__ == "__main__":
 #     logging.basicConfig(level=logging.INFO)
