@@ -64,7 +64,7 @@ if __name__ == "__main__":
     except Exception as err:
         error_logger(f'При запуске бота ошибка: \n{repr(err)}')
 
-
+# Если нет сервера для вебхуков, то можно на поллинге запустить
 # async def old_main():
 #     BotConfig.scheduler.start()
 #     await set_commands(bot=BotConfig.bot)
