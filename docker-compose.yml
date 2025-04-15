@@ -13,7 +13,7 @@ services:
       - .:/zyzzybot
       - ./src/bot/logs:/src/bot/logs
     depends_on:
-      - redis_
+      - zyzzy_redis
 
   zyzzy_redis:
     image: redis:7.2.5-alpine3.20
@@ -41,7 +41,7 @@ services:
     networks:
       zyzzy_net:
     depends_on:
-      - redis_
+      - zyzzy_redis
       - zyzzybot
 
 volumes:
