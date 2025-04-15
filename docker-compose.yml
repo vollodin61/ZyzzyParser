@@ -12,8 +12,6 @@ services:
     volumes:
       - .:/zyzzybot
       - ./src/bot/logs:/src/bot/logs
-    depends_on:
-      - redis_
 
 
 networks:
