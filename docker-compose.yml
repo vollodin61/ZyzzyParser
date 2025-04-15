@@ -6,7 +6,7 @@ services:
     restart: always
     command: python main.py
     networks:
-      - zyzzy_net
+      - nginx_net
     env_file:
       - .env
     volumes:
